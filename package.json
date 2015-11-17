@@ -1,0 +1,35 @@
+{
+  "name": "mdl-ripple",
+  "version": "0.0.1",
+  "description": "Material design ripple effect",
+  "main": "src/index.js",
+  "keywords": [
+    "material",
+    "design",
+    "ripple"
+  ],
+  "author": "Sébastien Renault <srenault.contact@gmail.com>",
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.12.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "jshint-stylish": "^2.1.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  },
+  "jshintConfig": {
+    "esnext": true,
+    "freeze": true
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:srenault/mdl-ripple.git"
+  }
+}
