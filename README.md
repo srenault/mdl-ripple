@@ -24,7 +24,7 @@ const rippleItem = Ripple(item, {
 rippleItem.downgrade();
 ~~~
 
-Or by trigering ripple effet manually:
+Or by triggering ripple effet manually:
 
 ~~~ javascript
 const ripple = Ripple(item, {
