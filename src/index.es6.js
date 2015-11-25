@@ -32,11 +32,13 @@ export default function init(element, options) {
 
     recentering = element.classList.contains(CssClasses.RIPPLE_CENTER);
 
-    element.addEventListener('mousedown', boundDownHandler);
-    element.addEventListener('mouseleave', boundUpHandler);
-    element.addEventListener('touchstart', boundDownHandler);
-    element.addEventListener('touchend', boundUpHandler);
-    element.addEventListener('blur', boundUpHandler);
+    if(!options.ignoreEvents) {
+      element.addEventListener('mousedown', boundDownHandler);
+      element.addEventListener('mouseleave', boundUpHandler);
+      element.addEventListener('touchstart', boundDownHandler);
+      element.addEventListener('touchend', boundUpHandler);
+      element.addEventListener('blur', boundUpHandler);
+    }
   }
 
   function boundDownHandler(event) {
@@ -51,7 +53,6 @@ export default function init(element, options) {
     }
 
     rippleElement.style.opacity = 0.3;
-
     if (event.type === 'mousedown' && ignoringMouseDown) {
       ignoringMouseDown = false;
     } else {
@@ -151,14 +152,24 @@ export default function init(element, options) {
     }
   }
 
+  function downgrade() {
+    element.removeEventListener('mousedown', boundDownHandler);
+    element.removeEventListener('touchstart', boundDownHandler);
+    element.removeEventListener('mouseup', boundUpHandler);
+    element.removeEventListener('mouseleave', boundUpHandler);
+    element.removeEventListener('touchend', boundUpHandler);
+    element.removeEventListener('blur', boundUpHandler);
+  }
+
   return {
-    downgrade: function() {
-      element.removeEventListener('mousedown', boundDownHandler);
-      element.removeEventListener('touchstart', boundDownHandler);
-      element.removeEventListener('mouseup', boundUpHandler);
-      element.removeEventListener('mouseleave', boundUpHandler);
-      element.removeEventListener('touchend', boundUpHandler);
-      element.removeEventListener('blur', boundUpHandler);
+    downgrade: downgrade,
+
+    trigger: function(e) {
+      downgrade();
+      element.addEventListener('mouseleave', boundUpHandler);
+      element.addEventListener('touchend', boundUpHandler);
+      element.addEventListener('blur', boundUpHandler);
+      boundDownHandler(e);
     }
   };
 }
