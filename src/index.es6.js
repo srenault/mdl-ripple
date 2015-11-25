@@ -61,7 +61,7 @@ export default function init(element, options) {
       if (frameCount > 0) return;
       frameCount = 1;
 
-      const bound = event.currentTarget.getBoundingClientRect();
+      const bound = event.target.getBoundingClientRect();
 
       // Check if we are handling a keyboard click.
       if (event.clientX === 0 && event.clientY === 0) {
