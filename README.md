@@ -5,7 +5,7 @@ Adapt [material design lite](https://github.com/google/material-design-lite/blob
 ## Install
 
 ```sh
-npm install --save-dev mdl-ripple
+npm install --save mdl-ripple
 ```
 
 ## API
@@ -24,3 +24,16 @@ const rippleItem = Ripple(item, {
 rippleItem.downgrade();
 ~~~
 
+Or by trigering ripple effet manually:
+
+~~~ javascript
+const ripple = Ripple(item, {
+  background: 'blue',
+  duration: '2s',
+  ignoreEvents: true
+});
+
+item.addEventListener('touchstart', ripple.trigger, false);
+
+item.addEventListener('mousedown', ripple.trigger, false);
+~~~
