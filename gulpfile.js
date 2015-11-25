@@ -1,22 +1,24 @@
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var babel = require('babelify');
 var gbabel = require('gulp-babel');
+var rename = require('gulp-rename');
 
 var packageJSON = require('./package');
 var jshintConfig = packageJSON.jshintConfig;
 
 gulp.task('build:ripple', function() {
-  return gulp.src('./src/**/*.js')
-    .pipe(concat('build.js'))
+  return gulp.src('./src/index.es6.js')
     .pipe(gbabel({
       presets: ['es2015']
     }))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(rename("build.js"))
+    .pipe(gulp.dest('./dist/'))
+    .pipe(rename("index.js"))
+    .pipe(gulp.dest('./src/'));
 });
 
 gulp.task('build:demo', function() {
